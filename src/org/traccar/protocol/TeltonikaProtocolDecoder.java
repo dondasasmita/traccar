@@ -109,6 +109,12 @@ public class TeltonikaProtocolDecoder extends BaseProtocolDecoder {
             case 9:
                 position.set(Position.PREFIX_ADC + 1, readValue(buf, length, false));
                 break;
+            case 13:
+                position.set(Position.KEY_FUEL_CONSUMPTION, readValue(buf, length, false) * 0.01);
+                break;
+            case 16:
+                position.set(Position.KEY_ODOMETER, readValue(buf,length,false));
+                break;
             case 17:
                 position.set("axisX", readValue(buf, length, true));
                 break;
@@ -169,6 +175,9 @@ public class TeltonikaProtocolDecoder extends BaseProtocolDecoder {
                 break;
             case 182:
                 position.set(Position.KEY_HDOP, readValue(buf, length, false) * 0.1);
+                break;
+            case 199:
+                position.set(Position.KEY_ODOMETER_TRIP, readValue(buf,length,false));
                 break;
             case 236:
                 if (readValue(buf, length, false) == 1) {
